@@ -1,17 +1,23 @@
 import React, { Component } from 'react';
-import { Input, Button, IconButton } from '@material-ui/core';
-import GitHubIcon from '@material-ui/icons/GitHub';
+import { Input, Button } from '@material-ui/core';
 import "./Home.css"
 
 class Home extends Component {
   	constructor (props) {
 		super(props)
 		this.state = {
-			url: ''
+			url: '',
+			users: [] // State to track users who join the meeting
 		}
 	}
 
 	handleChange = (e) => this.setState({ url: e.target.value })
+
+	addUser = (user) => {
+		this.setState((prevState) => ({
+			users: [...prevState.users, user]
+		}));
+	}
 
 	join = () => {
 		if (this.state.url !== "") {
@@ -26,16 +32,18 @@ class Home extends Component {
 	render() {
 		return (
 			<div className="container2">
-				{/* <div style={{fontSize: "14px", background: "white", width: "10%", textAlign: "center", margin: "auto", marginBottom: "10px"}}>
-					Source code: 
-					<IconButton style={{color: "black"}} onClick={() => window.location.href="https://github.com/Sanglm2207/Video-Meeting"}>
-						<GitHubIcon />
-					</IconButton>
-				</div> */}
-				
 				<div>
 					<h1 style={{ fontSize: "45px" }}>Video Meeting</h1>
 					<p style={{ fontWeight: "200" }}>Video conference website that lets you stay in touch with all your friends.</p>
+					</div>
+
+				<div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px', marginTop: '20px' }}>
+					{this.state.users.map(user => (
+						<div key={user.id} style={{ textAlign: 'center' }}>
+							<img src={user.avatar} alt={user.name} style={{ width: '100px', height: '100px', borderRadius: '50%' }} />
+							<p>{user.name}</p>
+						</div>
+					))}
 				</div>
 
 				<div style={{
