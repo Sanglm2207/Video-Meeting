@@ -5,9 +5,9 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "server": "nodemon --watch src --ext ts,tsx --exec ts-node src/server.ts",
     "client": "vite",
+    "preview": "vite preview",
     "build": "tsc && vite build",
-    "start": "node dist/server.js",
-    "preview": "vite preview"
+    "start": "node server.js"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
